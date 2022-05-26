@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Get Default Mic ID
+mic_id=`pacmd list-sources | grep -A 15 '* index' | awk '/index/{ print $3 }' | sed 's/#//g'`
+mute_state=`pacmd list-sources | grep -A 15 '* index' | awk '/muted/{ print $2 }' | sed 's/#//g'`
+
+pactl set-source-mute $mic_id 0
+dunstify -h string:x-canonical-private-synchronous:mic " Microphone is On  " -I ~/.config/icons/mic_fluent.png  -u critical
+

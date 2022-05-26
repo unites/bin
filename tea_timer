@@ -1,0 +1,9 @@
+#!/bin/sh
+
+timer=${1}
+
+dunstify -h string:x-canonical-private-synchronous:tea " Tea timer started for ${timer} minutes " -I ~/.config/icons/tea.png 
+
+sleep ${timer}m
+
+dunstify -h string:x-canonical-private-synchronous:tea " Tea timer for ${timer} minutes is now complete! " -I ~/.config/icons/tea.png  -u critical 

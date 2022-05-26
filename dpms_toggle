@@ -1,0 +1,15 @@
+#!/bin/sh
+# Turn off and On dpms, which makes the monitor go to sleep
+powersave=`xset q | grep "DPMS\ is" | sed 's/^.*\ //g'`
+
+if [[ ${powersave} =~ "Disabled" ]];
+then
+    xset s on
+    xset +dpms
+    dunstify -h string:x-canonical-private-synchronous:sleep " Screen sleeping on!  " -I ~/.config/icons/switch-on.png 
+elif [[ $powersave =~ "Enabled" ]];
+then
+    xset s off
+    xset -dpms
+    dunstify -h string:x-canonical-private-synchronous:sleep " Screen sleeping off! " -I ~/.config/icons/switch-off.png 
+fi

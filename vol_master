@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# pactl list sinks|grep -A 15
+
+descrip=`pactl info | grep "Default Sink:" | sed 's/Default\ Sink:\ //g'`
+
+# Get Default Mic ID
+mic_id=`pactl list sources | grep -B 3 "$descrip" | awk '/Source/{print $2}' | sed 's/#//g'`
+mute_state=`pactl list sources | grep -A 15 "$descrip" | awk '/Mute/{ print $2 }' | sed 's/#//g'`
+
+
+if [[ $1 =~ "up" ]];
+then
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+	volume=`pactl list sinks | grep -A 15 "Name: $descrip" | awk '/Volume: front/{ print $5 }' | sed 's/[%|,]//g'`
+	dunstify -h string:x-canonical-private-synchronous:music "Master Volume $volume%" -t 4000 -i audio-headphones -h int:value:"$volume"
+else
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+	volume=`pactl list sinks | grep -A 15 "Name: $descrip" |  awk '/Volume: front/{ print $5 }' | sed 's/[%|,]//g'`
+	dunstify -h string:x-canonical-private-synchronous:music "Master Volume $volume%" -t 4000 -i audio-headphones -h int:value:"$volume"
+fi
+
+
+# Old Pulse audio version, shouldn't be needed
+# if [[ $1 =~ "up" ]];
+# then
+# 	pactl set-sink-volume @DEFAULT_SINK@ +5%
+# 	volume=`pactl list sinks|grep -A 15 '* index'| awk '/volume: front/{ print $5 }' | sed 's/[%|,]//g'`
+# 	dunstify -h string:x-canonical-private-synchronous:music "Master Volume $volume%" -t 4000 -i audio-headphones -h int:value:"$volume"
+# else
+# 	pactl set-sink-volume @DEFAULT_SINK@ -5%
+# 	volume=`pacmd list-sinks|grep -A 15 '* index'| awk '/volume: front/{ print $5 }' | sed 's/[%|,]//g'`
+# 	dunstify -h string:x-canonical-private-synchronous:music "Master Volume $volume%" -t 4000 -i audio-headphones -h int:value:"$volume"
+# fi

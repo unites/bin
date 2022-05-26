@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sftp -oHostKeyAlgorithms=+ssh-dss ${1}@ftp3.cerner.com

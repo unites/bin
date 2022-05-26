@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# subl
+
+i3-msg "[class='Sublime_text'] floating enable, move scratchpad"

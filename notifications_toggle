@@ -1,0 +1,13 @@
+#!/bin/sh
+# Turn on/off notifications
+
+if [[ ${1} == "on" ]];
+then
+    dunstctl set-paused false
+    dunstify -h string:x-canonical-private-synchronous:sleep " Notifications are ON!  " -I ~/.config/icons/switch-on.png 
+elif [[ $1 == "off" ]];
+then
+    dunstify -h string:x-canonical-private-synchronous:sleep " Notifications are OFF! " -I ~/.config/icons/switch-off.png 
+    sleep 3
+    dunstctl set-paused true
+fi

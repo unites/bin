@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mic_id=`pactl info | grep "Default Source:" | sed 's/Default\ Source:\ //g'`
+
+pactl set-source-mute $mic_id 0
+dunstify -h string:x-canonical-private-synchronous:mic " Microphone is On  " -I ~/.config/icons/mic_fluent.png  -u critical 

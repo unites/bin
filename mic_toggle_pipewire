@@ -1,0 +1,18 @@
+#!/bin/sh
+# Find via: pactl list sources | grep Description:
+# device_descrip=`pactl get-default-source`
+
+# Get Default Mic ID
+mic_id=`pactl info | grep "Default Source:" | sed 's/Default\ Source:\ //g'`
+mute_state=$(pactl list sources | grep -A 7 "Name: $descrip" | awk '/Mute/{ print $2 }' | sed 's/#//g' | sed 's/\ //g')
+echo $mute_state
+if [[ $mute_state =~ ^no.*$ ]];
+then
+    mic_off_pipewire
+    # pactl set-source-mute $mic_id 1
+    # dunstify -h string:x-canonical-private-synchronous:mic " Microphone is Off " -t 4000 -I ~/.config/icons/mic_fluent_mute.png 
+else
+    mic_on_pipewire
+    # pactl set-source-mute $mic_id 0
+    # dunstify -h string:x-canonical-private-synchronous:mic " Microphone is On  " -I ~/.config/icons/mic_fluent.png  -u critical
+fi

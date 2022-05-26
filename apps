@@ -5,9 +5,9 @@
 # Make sure you have create a /srv/app directory with privs to your user
 # sudo mkdir -p /srv/app/chrome; sudo chown $USER:$USER /srv/app/chrome
 
-usage() { echo "Usage: $0 [-pygcoutr]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-cryptogv]" 1>&2; exit 1; }
 
-while getopts ":pygc" o; do
+while getopts ":cryptogv" o; do
     case "${o}" in
         p)
             flatpak run com.google.Chrome --app=http://10.2.2.20:32400/web/index.html --user-data-dir=/srv/app/chrome --class="iPlex"
@@ -30,33 +30,12 @@ while getopts ":pygc" o; do
         r)
             flatpak run com.google.Chrome --app=https://rpg.sim.pub/ --user-data-dir=/srv/app/chrome --class="iRPG"
             ;;
+        v)
+            flatpak run com.google.Chrome -proxy-server="10.1.1.10:3127" --incognito --user-data-dir=$HOME/.app/brave_vpn
+            ;;
         *)
             usage
             ;;
     esac
 done
 shift $((OPTIND-1))
-
-
-
-    # bindsym 1 exec --no-startup-id tea_timer 1, mode "default"
-    # bindsym 2 exec --no-startup-id tea_timer 2, mode "default"
-    # bindsym c exec $chrome, mode "default"
-    # bindsym b exec $brave, mode "default"
-    # bindsym $shf+b exec $brave --user-data-dir=$HOME/.app/brave_media, mode "default"
-    # bindsym f exec $firefox, mode "default"
-    # # bindsym s exec $brave --app=https://ice.pyre.one/ --user-data-dir=$HOME/.app/brave_coder --class="iCode", mode "default"
-    # bindsym s exec $brave --profile-directory=Default --app-id=genkbmbgjejbfejnofonljkboajhpgdg, mode "default"
-    # bindsym v exec $brave --proxy-server="10.1.1.10:3127" --incognito --user-data-dir=$HOME/.app/brave_vpn, mode "default"
-    # #bindsym n exec $brave --proxy-server="10.1.1.10:3127" --user-data-dir=$HOME/.app/brave_vpn, mode "default"
-    # bindsym w exec $brave --proxy-server="socks5://127.0.0.1:8080" --user-data-dir=$HOME/.app/brave_work, mode "default"
-    # bindsym m exec $brave --app=https://outlook.office.com/ --user-data-dir=$HOME/.app/brave_media --class="iOutlook", mode "default"
-    # bindsym p exec $brave --app=http://10.1.1.10:32400/web/index.html --user-data-dir=$HOME/.app/brave_media --class="iPlex", mode "default"
-    # bindsym n exec $brave --app=https://www.netflix.com/browse --user-data-dir=$HOME/.app/brave_media --class="iNetflix", mode "default"
-    # bindsym g exec $brave --app=https://play.geforcenow.com/ --user-data-dir=$HOME/.app/brave_media --class="iGeforce", mode "default"
-    # bindsym y exec $brave --app=https://youtube.com/ --user-data-dir=$HOME/.app/brave_media --class="iYouTube", mode "default"
-    # bindsym r exec $brave --app=https://rpg.sim.pub/ --user-data-dir=$HOME/.app/brave_rpg --class="iRPG", mode "default"
-    # bindsym t exec $brave --app=http://10.1.1.4:30000/ --user-data-dir=$HOME/.app/brave_dev --class="iRPGtest", mode "default"
-    # bindsym d exec $brave --app=https://www.dndbeyond.com/ --user-data-dir=$HOME/.app/brave_media --class="iDnD", mode "default"
-    # bindsym l         exec i3lock -t -i $lock_screen, mode "default"
-    # bindsym Return    mode "default"

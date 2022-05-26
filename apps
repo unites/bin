@@ -2,6 +2,9 @@
 
 # This script will launch apps in web app windows using flatpak chrome
 
+# Make sure you have create a /srv/app directory with privs to your user
+# sudo mkdir -p /srv/app/chrome; sudo chown $USER:$USER /srv/app/chrome
+
 usage() { echo "Usage: $0 [-pygcoutr]" 1>&2; exit 1; }
 
 while getopts ":pygc" o; do

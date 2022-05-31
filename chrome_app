@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# This script will launch apps in web app windows using flatpak chrome
+
+# Make sure you have create a /srv/app directory with privs to your user
+# sudo mkdir -p /srv/app/chrome; sudo chown $USER:$USER /srv/app/chrome
+
+usage() { echo "Usage: $0 [-cryptogvnbd]" 1>&2; exit 1; }
+
+browser="flatpak run com.google.Chrome"
+browser_dir="chrome"
+
+home=$(echo ~)
+
+while getopts ":cryptogvnbd" o; do
+    case "${o}" in
+        p)
+            $browser --app=http://10.2.2.20:32400/web/index.html --user-data-dir=$home/.app/$browser_dir --class="iPlex"
+            ;;
+        y)
+            $browser --app=https://youtube.com/ --user-data-dir=$home/.app/$browser_dir --class="iYoutube"
+            # midori -a https://youtube.com/
+            ;;
+        g)
+            $browser --app=https://play.geforcenow.com/ --user-data-dir=$home/.app/$browser_dir --class="iGeforce"
+            ;;
+        b)
+            $browser  --profile=$home/.app/$browser_dir --class="iBrave"
+            ;;
+        o)
+            $browser  --app=https://outlook.office.com/  --profile=$home/.app/$browser_dir  --class="iOutlook"
+            ;;
+        t)
+            $browser  --app=https://teams.microsoft.com/ --profile=$home/.app/$browser_dir  --class="iTeams"
+            ;;
+        d)
+            $browser  --app=https://www.dailywire.com/ --profile=$home/.app/$browser_dir  --class="iDW"
+            ;;
+        r)
+            $browser --app=https://rpg.sim.pub/ --profile=$home/.app/$browser_dir  --class="iRPG"
+            ;;
+        n)
+            $browser --app=http://blackfyre.pyre.one:7003/ --profile=$home/.app/$browser_dir  --class="iPodcasts"
+            ;;
+        c)
+            $browser --app=https://code.sim.pub/ --profile=$home/.app/$browser_dir  --class="iCode"
+            # midori -a https://code.sim.pub/
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+# shift $((OPTIND-1))

@@ -5,9 +5,9 @@
 # Make sure you have create a /srv/app directory with privs to your user
 # sudo mkdir -p /srv/app/chrome; sudo chown $USER:$USER /srv/app/chrome
 
-usage() { echo "Usage: $0 [-cryptogv]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-cryptogvn]" 1>&2; exit 1; }
 
-while getopts ":cryptogv" o; do
+while getopts ":cryptogvn" o; do
     case "${o}" in
         p)
             flatpak run com.google.Chrome --app=http://10.2.2.20:32400/web/index.html --user-data-dir=/srv/app/chrome --class="iPlex"
@@ -32,6 +32,10 @@ while getopts ":cryptogv" o; do
             ;;
         v)
             flatpak run com.google.Chrome -proxy-server="10.1.1.10:3127" --incognito --user-data-dir=$HOME/.app/brave_vpn
+            ;;
+        n)
+            flatpak run com.google.Chrome --app=http://blackfyre.pyre.one:7003/ --user-data-dir=/srv/app/chrome --class="iCast"
+            # epiphany http://blackfyre.pyre.one:7003/
             ;;
         *)
             usage

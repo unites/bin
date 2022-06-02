@@ -43,7 +43,7 @@ while getopts ":cryptogvnbd" o; do
             $browser --app=http://blackfyre.pyre.one:7003/ --profile=$home/.app/$browser_dir  --class="iPodcasts"
             ;;
         c)
-            $browser --app=https://code.sim.pub/ --profile=$home/.app/$browser_dir  --class="iCode"
+            $browser --app=https://www.chess.com/ --profile=$home/.app/$browser_dir  --class="iChess"
             # midori -a https://code.sim.pub/
             ;;
         *)

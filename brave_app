@@ -8,8 +8,8 @@
 usage() { echo "Usage: $0 [-cryptogvnbd]" 1>&2; exit 1; }
 
 browser="flatpak run com.brave.Browser"
+chrome="flatpak run com.google.Chrome"
 browser_dir="brave"
-
 home=$(echo ~)
 
 while getopts ":cryptogvnbd" o; do
@@ -22,7 +22,7 @@ while getopts ":cryptogvnbd" o; do
             # midori -a https://youtube.com/
             ;;
         g)
-            $browser --app=https://play.geforcenow.com/ --user-data-dir=$home/.app/$browser_dir --class="iGeforce"
+            $chrome --app=https://play.geforcenow.com/ --user-data-dir=$home/.app/chrome --class="iGeforce"
             ;;
         b)
             $browser  --profile=$home/.app/$browser_dir --class="iBrave"

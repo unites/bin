@@ -4,4 +4,4 @@
 
 nputs=$@
 
-git add .;git commit -m "${nputs}"; ggpush
+git add .;git commit -m "${nputs}"; git push origin
